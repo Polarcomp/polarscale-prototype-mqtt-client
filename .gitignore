@@ -1,0 +1,4 @@
+.env
+.vscode
+supabase/.env
+supabase/.env.local
