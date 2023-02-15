@@ -13,7 +13,7 @@ const influxParameters = {
 }
 
 const writeApi = new InfluxDB({ url: influxParameters.url, token: influxParameters.token }).getWriteApi(influxParameters.org, influxParameters.bucket);
-
+const decoder = new TextDecoder();
 const client = new Client({ url: 'mqtt://broker.emqx.io' }); // Deno and Node.js
 
 await client.connect();
@@ -21,21 +21,20 @@ await client.connect();
 await client.subscribe('testuser1/#');
 
 client.on('message', (topic: String, payload: Uint8Array) => {
-  console.log(topic, payload);
-  /*
-  const point = new Point('weight_measurement')
-    .tag('device_type', 'ESP32_scale')
-    .tag('device_id', 'id_1')
-    .tag('user_id', 'test-user1')
-    .floatField('weight', 42.0);
+  console.log(topic, JSON.parse(decoder.decode(payload)));
+  const data = JSON.parse(decoder.decode(payload));
+  const point = new Point(data.point)
+    .tag('device_type', data.device_type)
+    .tag('device_id', data.device_id)
+    .tag('user_id', data.user_id)
+    .timestamp(data.timestamp)
+    .floatField('weight', data.weight);
   writeApi.writePoint(point);
   writeApi.close().then(() => {
     console.log('Write finished');
   })
-  */
 });
 
-await client.publish('testuser1/id_1', 'aaa');
 
 //await client.disconnect();
 
