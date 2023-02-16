@@ -11,7 +11,6 @@ const writeApi = new InfluxDB({ url, token }).getWriteApi(org, bucket);
 
 client.subscribe('testuser/#');
 client.on('message', function (topic, payload) {
-    console.log(topic, payload.toString());
     const data = JSON.parse(payload.toString());
     const point = new Point(data.point)
         .tag('device_type', data.device_type)
