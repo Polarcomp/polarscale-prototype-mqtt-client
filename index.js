@@ -27,9 +27,6 @@ client.on('message', function (topic, payload) {
         .timestamp(data.timestamp)
         .floatField('weight', data.weight);
     writeApi.writePoint(point);
-    writeApi.close().then(() => {
-        console.log('Write finished');
-    });
 });
 
 app.get('/', async(req, res) => {
