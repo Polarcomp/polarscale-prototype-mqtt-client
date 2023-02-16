@@ -1,6 +1,5 @@
 require('dotenv').config()
 const mqtt = require('mqtt');
-const express = require('express');
 const { InfluxDB, Point } = require('@influxdata/influxdb-client');
 
 // Environment Variables
