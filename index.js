@@ -17,7 +17,6 @@ const writeApi = new InfluxDB({ url, token }).getWriteApi(org, bucket);
 client.subscribe('testuser1/#');
 client.on('message', function (topic, payload) {
     const data = JSON.parse(payload.toString());
-    console.log(topic, data);
     const point = new Point(data.point)
         .tag('device_type', data.device_type)
         .tag('device_id', data.device_id)
@@ -25,4 +24,5 @@ client.on('message', function (topic, payload) {
         .timestamp(data.timestamp)
         .floatField('weight', data.weight);
     writeApi.writePoint(point);
+    console.log('Data written to InfluxDB');
 });
