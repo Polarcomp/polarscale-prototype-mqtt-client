@@ -24,3 +24,4 @@ client.on('message', function (topic, payload) {
         console.log('Write finished');
     });
 });
+console.log('listening for MQTT messages');
