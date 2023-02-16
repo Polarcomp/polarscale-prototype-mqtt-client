@@ -30,8 +30,8 @@ client.on('message', function (topic, payload) {
     writeApi.writePoint(point);
 });
 
-app.get('/', async(req, res) => {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
+app.get('/', async(_, res) => {
+    res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 app.listen(PORT, () => {
