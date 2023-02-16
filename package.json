@@ -21,6 +21,7 @@
     "@influxdata/influxdb-client": "^1.33.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mqtt": "^4.3.7"
+    "mqtt": "^4.3.7",
+    "path": "^0.12.7"
   }
 }

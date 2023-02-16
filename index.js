@@ -1,6 +1,7 @@
 require('dotenv').config()
 const mqtt = require('mqtt');
 const express = require('express');
+const path = require('path');
 const { InfluxDB, Point } = require('@influxdata/influxdb-client');
 const PORT = process.env.PORT || 3030;
 
